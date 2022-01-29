@@ -14,7 +14,7 @@ interface ScalarInterface
     public function value();
 
     /**
-     * Check if a given value is the same as one of the invoked instance.
+     * Check the equivalence of this instance and a given one, only with their values.
      *
      * @param mixed $value
      * @return boolean
@@ -22,7 +22,7 @@ interface ScalarInterface
     public function isEqual($value): bool;
 
     /**
-     * Check if a given value and its class is the same as these of the invoked instance.
+     * Check the equivalence of this instance and a given one, not only with their values but also their classes.
      *
      * @param mixed $value
      * @return boolean
