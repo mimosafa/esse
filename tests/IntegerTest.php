@@ -6,22 +6,22 @@ use Esse\IntegerInterface;
 use Esse\IntegerTrait;
 use PHPUnit\Framework\TestCase;
 
-final class IntegerTraitTest extends TestCase
+final class IntegerTest extends TestCase
 {
     public function test_validate()
     {
         $valids = [ -3, 0, 1, 999999, 0x1A, 0b1101, \PHP_INT_MAX, ];
 
         foreach ($valids as $valid) {
-            $this->assertTrue(IntegerTraitTestMock::validate($valid));
+            $this->assertTrue(IntegerTestMock::validate($valid));
         }
 
         $invalids = [ '1', 3.14, true, \M_PI, \INF, ];
 
         foreach ($invalids as $invalid) {
-            $this->assertFalse(IntegerTraitTestMock::validate($invalid));
+            $this->assertFalse(IntegerTestMock::validate($invalid));
         }
     }
 }
 
-class IntegerTraitTestMock implements IntegerInterface { use IntegerTrait; }
+class IntegerTestMock implements IntegerInterface { use IntegerTrait; }
