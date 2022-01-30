@@ -4,4 +4,4 @@ Easily Simulated Scalars and Enums
 
 ## Description
 
-Immutable and enhanced class that is easy to use as a value object.
+A library of pseudo-scalar values and pseudo-enumerations with moderately distributed functionality for easy use as value objects.

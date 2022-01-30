@@ -4,6 +4,16 @@ namespace Esse;
 
 use ValueError;
 
+/**
+ * Pseudo scalar interface
+ *
+ * @method mixed value()
+ * @method bool isEqual(mixed $value)
+ * @method bool isIdentical(mixed $value)
+ * @method static bool validate(mixed $value)
+ * @method static static from(mixed $value)
+ * @method static static|null tryFrom(mixed $value)
+ */
 interface ScalarInterface
 {
     /**

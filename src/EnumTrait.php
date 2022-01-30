@@ -4,15 +4,6 @@ namespace Esse;
 
 use Esse\Util\EnumerateConstantsTrait;
 
-/**
- * Pseudo Enumerations trait
- *
- * @see https://www.php.net/manual/en/class.unitenum.php
- * @see https://www.php.net/manual/en/class.backedenum.php
- *
- * @property-read string $name  The case-sensitive name of the case itself.
- * @property-read mixed $value  The value specified in the definition.
- */
 trait EnumTrait
 {
     use ScalarTrait {
