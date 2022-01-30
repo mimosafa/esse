@@ -1,6 +1,6 @@
 {
     "name": "mimosafa/esse",
-    "description": "Enhanced and Simulated Scalars and Enums",
+    "description": "Easily simulated scalars and enums",
     "type": "library",
     "require-dev": {
         "phpunit/phpunit": "^9.5"

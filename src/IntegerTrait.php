@@ -7,7 +7,7 @@ trait IntegerTrait
     use ScalarTrait;
 
     /**
-     * Get a integer value
+     * Get a integer value.
      *
      * @return integer
      */
@@ -17,7 +17,7 @@ trait IntegerTrait
     }
 
     /**
-     * Validate a given value.
+     * Validates a given value as integer.
      *
      * @param mixed $value
      * @return boolean

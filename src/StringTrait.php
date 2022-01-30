@@ -25,7 +25,7 @@ trait StringTrait
     }
 
     /**
-     * Get a string value
+     * Get a string value.
      *
      * @return string
      */
@@ -35,7 +35,7 @@ trait StringTrait
     }
 
     /**
-     * Check the equivalence of this instance and a given one, only with their values.
+     * Checks for equivalence with a given, only with their values.
      *
      * @param mixed $value
      * @return boolean
@@ -49,7 +49,7 @@ trait StringTrait
     }
 
     /**
-     * Validate a given value.
+     * Validates a given value as string.
      *
      * @param mixed $value
      * @return boolean
@@ -60,7 +60,7 @@ trait StringTrait
     }
 
     /**
-     * Stringable method.
+     * Return the string representation of the current element.
      *
      * @return string
      */

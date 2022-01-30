@@ -29,7 +29,7 @@ final class ScalarTraitTest extends TestCase
 
     public function test_value()
     {
-        $value = \rand();
+        $value = \rand() + 1;
         $instance = new ScalarTraitTestMock($value);
         $this->assertEquals($value, $instance->value());
     }
