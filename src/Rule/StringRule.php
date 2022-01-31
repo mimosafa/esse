@@ -27,15 +27,13 @@ final class StringRule implements RuleInterface
         if (! \is_string($value) && ! $value instanceof Stringable) {
             throw new ValueError();
         }
-
         if ($value instanceof Stringable) {
             $value = $value->__toString();
         }
 
-        if (! $this->acceptMultibyte() && \strlen($value) !== \mb_strlen($value)) {
+        if ($this->acceptMultibyte === false && \strlen($value) !== \mb_strlen($value)) {
             return false;
         }
-
         return true;
     }
 
@@ -70,10 +68,5 @@ final class StringRule implements RuleInterface
         }
 
         return $hasRule ? new self($acceptMultibyte) : false;
-    }
-
-    public function acceptMultibyte(): bool
-    {
-        return $this->acceptMultibyte !== false;
     }
 }

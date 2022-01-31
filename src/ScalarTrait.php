@@ -3,8 +3,12 @@
 namespace Esse;
 
 use Esse\Rule\RuleInterface;
+use Throwable;
 use ValueError;
 
+/**
+ * @psalm-require-implements ScalarInterface
+ */
 trait ScalarTrait
 {
     /**
@@ -18,9 +22,13 @@ trait ScalarTrait
      * Constructor
      *
      * @param mixed $value
+     * @return void
+     * @throws ValueError
      */
     public function __construct($value)
     {
+        $value = $value instanceof static ? $value->value() : $value;
+
         if (! static::validate($value)) {
             throw new ValueError();
         }
@@ -112,13 +120,9 @@ trait ScalarTrait
      *
      * @param mixed $value
      * @return static
-     * @throws ValueError
      */
     public static function from($value): static
     {
-        if ($value instanceof static) {
-            return new static($value->value());
-        }
         return new static($value);
     }
 
@@ -132,8 +136,11 @@ trait ScalarTrait
     {
         try {
             return static::from($value);
-        } catch (ValueError $e) {
-            return null;
+        } catch (Throwable $e) {
+            if ($e instanceof ValueError) {
+                return null;
+            }
+            throw $e;
         }
     }
 }

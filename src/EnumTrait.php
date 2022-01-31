@@ -11,10 +11,7 @@ use Esse\Util\EnumerateConstantsTrait;
  */
 trait EnumTrait
 {
-    use ScalarTrait {
-        __construct as protected;
-    }
-    use EnumerateConstantsTrait;
+    use ScalarTrait, EnumerateConstantsTrait;
 
     /**
      * Gets the case-sensitive name of the case itself.

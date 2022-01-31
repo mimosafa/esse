@@ -2,8 +2,6 @@
 
 namespace Esse;
 
-use ValueError;
-
 /**
  * Pseudo scalar value interface
  *
@@ -52,7 +50,6 @@ interface ScalarInterface
      *
      * @param mixed $value
      * @return static
-     * @throws ValueError
      */
     public static function from($value): static;
 
