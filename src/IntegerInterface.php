@@ -5,7 +5,7 @@ namespace Esse;
 interface IntegerInterface extends ScalarInterface
 {
     /**
-     * Get a integer value.
+     * Gets the integer value.
      *
      * @return integer
      */

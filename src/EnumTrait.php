@@ -4,6 +4,11 @@ namespace Esse;
 
 use Esse\Util\EnumerateConstantsTrait;
 
+/**
+ * Pseudo enumerations trait
+ *
+ * @psalm-require-implements EnumInterface
+ */
 trait EnumTrait
 {
     use ScalarTrait {
@@ -12,7 +17,7 @@ trait EnumTrait
     use EnumerateConstantsTrait;
 
     /**
-     * Get the case-sensitive name of the case itself.
+     * Gets the case-sensitive name of the case itself.
      *
      * @return string
      */
@@ -22,14 +27,27 @@ trait EnumTrait
     }
 
     /**
-     * Validates a given value as an enum.
+     * Validates a type of a given value.
+     *
+     * @uses \Esse\Util\EnumerateConstantsTrait::validateBackedValueForEnums()
      *
      * @param mixed $value
      * @return boolean
      */
-    public static function validate($value): bool
+    protected static function validateType($value): bool
     {
-        return static::validateBackedValueForEnums($value) && \in_array($value, static::toArray(), true);
+        return static::validateBackedValueForEnums($value);
+    }
+
+    /**
+     * Validates a given value with the specific rule.
+     *
+     * @param mixed $value
+     * @return boolean
+     */
+    protected static function validateWithRule($value): bool
+    {
+        return \in_array($value, static::toArray(), true);
     }
 
     /**
@@ -66,7 +84,7 @@ trait EnumTrait
     }
 
     /**
-     * Get the read-only property.
+     * Gets the read-only property.
      *
      * @param string $name
      * @return string|int

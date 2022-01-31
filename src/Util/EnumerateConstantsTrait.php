@@ -8,14 +8,14 @@ use ReflectionClass;
 trait EnumerateConstantsTrait
 {
     /**
-     * Enums cached on a class-by-class basis
+     * Enums cached on a class-by-class basis.
      *
      * @var array<string, array<string, mixed>>
      */
     protected static $enumsCache = [];
 
     /**
-     * Get enums as an array.
+     * Gets enums as an array.
      *
      * @final
      *

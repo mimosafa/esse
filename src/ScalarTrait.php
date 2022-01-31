@@ -2,12 +2,13 @@
 
 namespace Esse;
 
+use Esse\Rule\RuleInterface;
 use ValueError;
 
 trait ScalarTrait
 {
     /**
-     * Scalar value
+     * Original scalar value
      *
      * @var mixed
      */
@@ -27,7 +28,7 @@ trait ScalarTrait
     }
 
     /**
-     * Get a scalar value
+     * Gets the scalar value
      *
      * @return mixed
      */
@@ -64,18 +65,50 @@ trait ScalarTrait
     }
 
     /**
-     * Validates a given value as scalar.
+     * Validates a given value.
      *
      * @param mixed $value
      * @return boolean
      */
     public static function validate($value): bool
     {
+        return static::validateType($value) && static::validateWithRule($value);
+    }
+
+    /**
+     * Validates a type of a given value.
+     *
+     * @param mixed $value
+     * @return boolean
+     */
+    protected static function validateType($value): bool
+    {
         return \is_scalar($value);
     }
 
     /**
-     * Get instance from scalar value. If an invalid value is given, it will throw a ValueError.
+     * Validates a given value with the specific rule.
+     *
+     * @param mixed $value
+     * @return boolean
+     */
+    protected static function validateWithRule($value): bool
+    {
+        return ($rule = static::rule()) ? $rule->validate($value) : true;
+    }
+
+    /**
+     * Returns a specific rule of type. Returns false if not defined.
+     *
+     * @return RuleInterface|false
+     */
+    protected static function rule(): RuleInterface|false
+    {
+        return false;
+    }
+
+    /**
+     * Gets an instance from a scalar value. If an invalid value is given, a ValueError will be thrown.
      *
      * @param mixed $value
      * @return static
@@ -90,7 +123,7 @@ trait ScalarTrait
     }
 
     /**
-     * Get instance from scalar value. If an invalid value is given, it will return null.
+     * Gets an instance from a scalar value. If an invalid value is given, null is returned.
      *
      * @param mixed $value
      * @return static|null

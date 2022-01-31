@@ -7,7 +7,7 @@ trait IntegerTrait
     use ScalarTrait;
 
     /**
-     * Get a integer value.
+     * Gets the integer value.
      *
      * @return integer
      */
@@ -17,12 +17,12 @@ trait IntegerTrait
     }
 
     /**
-     * Validates a given value as integer.
+     * Validates a type of a given value.
      *
      * @param mixed $value
      * @return boolean
      */
-    public static function validate($value): bool
+    protected static function validateType($value): bool
     {
         return \is_int($value);
     }

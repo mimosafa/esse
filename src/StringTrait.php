@@ -2,14 +2,26 @@
 
 namespace Esse;
 
+use Esse\Rule\RuleInterface;
+use Esse\Rule\StringRule;
 use Stringable;
 
+/**
+ * @psalm-require-implements StringInterface
+ */
 trait StringTrait
 {
     use ScalarTrait {
         __construct as constructScalar;
         isEqual as isEqualScalar;
     }
+
+    /**
+     * Rules specific to string type cached on a class-by-class basis.
+     *
+     * @var array<string, StringRule|false
+     */
+    protected static $stringRules = [];
 
     /**
      * Constructor
@@ -25,7 +37,7 @@ trait StringTrait
     }
 
     /**
-     * Get a string value.
+     * Gets the string value.
      *
      * @return string
      */
@@ -49,18 +61,29 @@ trait StringTrait
     }
 
     /**
-     * Validates a given value as string.
+     * Validates a type of a given value.
      *
      * @param mixed $value
      * @return boolean
      */
-    public static function validate($value): bool
+    protected static function validateType($value): bool
     {
         return \is_string($value) || $value instanceof Stringable;
     }
 
     /**
-     * Return the string representation of the current element.
+     * Returns a specific rule of type. Returns false if not defined.
+     *
+     * @return RuleInterface|false
+     */
+    protected static function rule(): RuleInterface|false
+    {
+        $class = \get_called_class();
+        return self::$stringRules[$class] ?? self::$stringRules[$class] = StringRule::init($class);
+    }
+
+    /**
+     * Returns the string representation of the current element.
      *
      * @return string
      */

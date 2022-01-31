@@ -20,7 +20,7 @@ namespace Esse;
 interface EnumInterface extends ScalarInterface
 {
     /**
-     * Get the case-sensitive name of the case itself.
+     * Gets the case-sensitive name of the case itself.
      *
      * @return string
      */

@@ -6,8 +6,15 @@ use Stringable;
 
 interface StringInterface extends Stringable, ScalarInterface
 {
+    # /**
+    #  * Whether or not to allow multibyte character strings.
+    #  *
+    #  * @var false
+    #  */
+    # const MULTIBYTE = false;
+
     /**
-     * Get a string value.
+     * Gets the string value.
      *
      * @return string
      */

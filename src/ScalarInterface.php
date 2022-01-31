@@ -5,7 +5,7 @@ namespace Esse;
 use ValueError;
 
 /**
- * Pseudo scalar interface
+ * Pseudo scalar value interface
  *
  * @method mixed value()
  * @method bool isEqual(mixed $value)
@@ -17,7 +17,7 @@ use ValueError;
 interface ScalarInterface
 {
     /**
-     * Get a scalar value.
+     * Gets the scalar value.
      *
      * @return mixed
      */
@@ -40,7 +40,7 @@ interface ScalarInterface
     public function isIdentical($value): bool;
 
     /**
-     * Validate a given value.
+     * Validates a given value on a scalar.
      *
      * @param mixed $value
      * @return boolean
@@ -48,7 +48,7 @@ interface ScalarInterface
     public static function validate($value): bool;
 
     /**
-     * Get instance from scalar value. If an invalid value is given, it will throw a ValueError.
+     * Gets an instance from a scalar value. If an invalid value is given, a ValueError will be thrown.
      *
      * @param mixed $value
      * @return static
@@ -57,7 +57,7 @@ interface ScalarInterface
     public static function from($value): static;
 
     /**
-     * Get instance from scalar value. If an invalid value is given, it will return null.
+     * Gets an instance from a scalar value. If an invalid value is given, null is returned.
      *
      * @param mixed $value
      * @return static|null
