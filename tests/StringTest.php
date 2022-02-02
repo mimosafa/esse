@@ -5,7 +5,6 @@ namespace Esse\Tests;
 use Esse\StringInterface;
 use Esse\StringTrait;
 use PHPUnit\Framework\TestCase;
-use Stringable;
 
 final class StringTest extends TestCase
 {
@@ -13,7 +12,7 @@ final class StringTest extends TestCase
 
     public function test_validate()
     {
-        $valids = [ 'abcd', '', 'あいうえお', '1978', __CLASS__, new StringTraitStringableMock ];
+        $valids = [ 'abcd', '', 'あいうえお', '1978', __CLASS__, ];
 
         foreach ($valids as $valid) {
             $this->assertTrue(StringTestMock::validate($valid));
@@ -25,33 +24,6 @@ final class StringTest extends TestCase
             $this->assertFalse(StringTestMock::validate($invalid));
         }
     }
-
-    public function test_is_equal()
-    {
-        $instance = new StringTestMock(StringTraitStringableMock::VALUE);
-        $stringable = new StringTraitStringableMock();
-
-        $this->assertTrue($instance->isEqual($stringable));
-    }
-
-    public function test_stringable()
-    {
-        $value = __CLASS__;
-        $instance = new StringTestMock($value);
-        $string = (string) $instance;
-
-        $this->assertEquals($value, $string);
-    }
 }
 
 class StringTestMock implements StringInterface { use StringTrait; }
-
-class StringTraitStringableMock implements Stringable
-{
-    public const VALUE = 'Stringable';
-
-    public function __toString(): string
-    {
-        return self::VALUE;;
-    }
-}

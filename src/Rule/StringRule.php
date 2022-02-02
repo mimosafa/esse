@@ -5,35 +5,52 @@ namespace Esse\Rule;
 use Esse\StringInterface;
 use LogicException;
 use ReflectionClass;
-use Stringable;
 use ValueError;
 
-final class StringRule implements RuleInterface
+class StringRule implements RuleInterface
 {
+    /**
+     * Constructor
+     *
+     * @param bool|null $multibyte
+     * @param string|null $regexPattern
+     */
     public function __construct(
-        private ?bool $acceptMultibyte = null,
+        private ?bool $multibyte = null,
+        private ?string $regexPattern = null,
     )
     {
+        if (isset($multibyte)) {
+            if (! \is_bool($multibyte)) {
+                throw new LogicException();
+            }
+        }
+        if (isset($regexPattern)) {
+            if (@\preg_match($regexPattern, '') === false) {
+                throw new LogicException();
+            }
+        }
     }
 
     /**
      * Validates a given value with rules
      *
-     * @param string|Stringable $value
+     * @param string $value
      * @return bool
      */
     public function validate($value): bool
     {
-        if (! \is_string($value) && ! $value instanceof Stringable) {
+        if (! \is_string($value)) {
             throw new ValueError();
         }
-        if ($value instanceof Stringable) {
-            $value = $value->__toString();
-        }
 
-        if ($this->acceptMultibyte === false && \strlen($value) !== \mb_strlen($value)) {
+        if ($this->multibyte === false && \strlen($value) !== \mb_strlen($value)) {
             return false;
         }
+        if ($this->regexPattern && ! \preg_match($this->regexPattern, $value)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -52,21 +69,13 @@ final class StringRule implements RuleInterface
             return false;
         }
 
-        $hasRule = false;
-
-        $acceptMultibyte = $constants['MULTIBYTE'] ?? null;
-
-        if (isset($acceptMultibyte)) {
-            if (! \is_bool($acceptMultibyte)) {
-                throw new LogicException();
-            }
-            if ($acceptMultibyte === false) {
-                $hasRule = true;
-            } else {
-                $acceptMultibyte = null;
-            }
+        if (
+            \is_null($multibyte = $constants['MULTIBYTE'] ?? null)
+            && \is_null($regexPattern = $constants['REGEX_PATTERN'] ?? null)
+        ) {
+            return false;
         }
 
-        return $hasRule ? new self($acceptMultibyte) : false;
+        return new self($multibyte, $regexPattern);
     }
 }
