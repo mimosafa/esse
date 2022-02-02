@@ -3,82 +3,30 @@
 namespace Esse\Tests\Rule;
 
 use Esse\Rule\IntegerRule;
-use InvalidArgumentException;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 
 final class IntegerRuleTest extends TestCase
 {
-    public function test_fail_to_initialize_1()
+    public function test_fail_to_initialize()
     {
-        $this->expectException(InvalidArgumentException::class);
-        new IntegerRule(gte: 1, gt: 0);
+        new IntegerRule(min:0, max:0);
+
+        $this->expectException(LogicException::class);
+        new IntegerRule(min: 1, max: 0);
     }
 
-    public function test_fail_to_initialize_2()
+    public function test_min()
     {
-        $this->expectException(InvalidArgumentException::class);
-        new IntegerRule(lte: 99, lt: 100);
-    }
-
-    public function test_fail_to_initialize_3()
-    {
-        $rule = new IntegerRule(gte: 9, lt: 10);
-        $this->assertInstanceOf(IntegerRule::class, $rule);
-        $this->expectException(InvalidArgumentException::class);
-        new IntegerRule(gte: 10, lt: 10);
-    }
-
-    public function test_fail_to_initialize_4()
-    {
-        $rule = new IntegerRule(gte: 10, lte: 10);
-        $this->assertInstanceOf(IntegerRule::class, $rule);
-        $this->expectException(InvalidArgumentException::class);
-        new IntegerRule(gte: 10, lte: 9);
-    }
-
-    public function test_fail_to_initialize_5()
-    {
-        $rule = new IntegerRule(gt: 9, lt: 11);
-        $this->assertInstanceOf(IntegerRule::class, $rule);
-        $this->expectException(InvalidArgumentException::class);
-        new IntegerRule(gt: 10, lt: 11);
-    }
-
-    public function test_fail_to_initialize_6()
-    {
-        $rule = new IntegerRule(gt: 10, lte: 11);
-        $this->assertInstanceOf(IntegerRule::class, $rule);
-        $this->expectException(InvalidArgumentException::class);
-        new IntegerRule(gt: 11, lte: 11);
-    }
-
-    public function test_greater_than_or_equal_to()
-    {
-        $rule = new IntegerRule(gte: 10);
+        $rule = new IntegerRule(min: 10);
         $this->assertFalse($rule->validate(9));
         $this->assertTrue($rule->validate(10));
         $this->assertTrue($rule->validate(11));
     }
 
-    public function test_greater_than()
+    public function test_max()
     {
-        $rule = new IntegerRule(gt: 10);
-        $this->assertFalse($rule->validate(9));
-        $this->assertFalse($rule->validate(10));
-        $this->assertTrue($rule->validate(11));
-    }
-
-    public function test_less_than()
-    {
-        $rule = new IntegerRule(lt: 10);
-        $this->assertTrue($rule->validate(9));
-        $this->assertFalse($rule->validate(10));
-        $this->assertFalse($rule->validate(11));
-    }
-
-    public function test_less_than_or_equal_to()
-    {
-        $rule = new IntegerRule(lte: 10);
+        $rule = new IntegerRule(max: 10);
         $this->assertTrue($rule->validate(9));
         $this->assertTrue($rule->validate(10));
         $this->assertFalse($rule->validate(11));

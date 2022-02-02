@@ -3,7 +3,6 @@
 namespace Esse;
 
 use Esse\Rule\IntegerRule;
-use Esse\Rule\RuleInterface;
 
 /**
  * @psalm-require-implements IntegerInterface
@@ -45,7 +44,7 @@ trait IntegerTrait
      *
      * @return IntegerRule|false
      */
-    protected static function rule(): RuleInterface|false
+    protected static function rule(): IntegerRule|false
     {
         $class = \get_called_class();
         return self::$integerRules[$class] ?? self::$integerRules[$class] = IntegerRule::init($class);

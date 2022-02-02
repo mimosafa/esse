@@ -3,43 +3,25 @@
 namespace Esse\Rule;
 
 use Esse\IntegerInterface;
-use InvalidArgumentException;
 use LogicException;
 use ReflectionClass;
 use ValueError;
 
 final class IntegerRule implements RuleInterface
 {
+    /**
+     * Constructor
+     *
+     * @param int|null $min
+     * @param int|null $max
+     */
     public function __construct(
-        private ?int $gte = null,
-        private ?int $gt = null,
-        private ?int $lt = null,
-        private ?int $lte = null,
+        private ?int $min = null,
+        private ?int $max = null,
     )
     {
-        // Refuses to define "__ than or equal to" and "__ than" in a same class.
-        if (isset($gte) && isset($gt)) {
-            throw new InvalidArgumentException();
-        }
-        if (isset($lt) && isset($lte)) {
-            throw new InvalidArgumentException();
-        }
-
-        if (isset($gte)) {
-            if (isset($lt) && $lt <= $gte) {
-                throw new InvalidArgumentException();
-            }
-            if (isset($lte) && $lte < $gte) {
-                throw new InvalidArgumentException();
-            }
-        }
-        else if (isset($gt)) {
-            if (isset($lt) && $lt <= ($gt + 1)) {
-                throw new InvalidArgumentException();
-            }
-            if (isset($lte) && $lte < ($gt + 1)) {
-                throw new InvalidArgumentException();
-            }
+        if (isset($min) && isset($max) && $min > $max) {
+            throw new LogicException();
         }
     }
 
@@ -55,16 +37,10 @@ final class IntegerRule implements RuleInterface
             throw new ValueError();
         }
 
-        if (isset($this->gte) && $value < $this->gte) {
+        if (isset($this->min) && $value < $this->min) {
             return false;
         }
-        if (isset($this->gt) && $value <= $this->gt) {
-            return false;
-        }
-        if (isset($this->lt) && $value >= $this->lt) {
-            return false;
-        }
-        if (isset($this->lte) && $value > $this->lte) {
+        if (isset($this->max) && $value > $this->max) {
             return false;
         }
 
@@ -86,29 +62,13 @@ final class IntegerRule implements RuleInterface
             return false;
         }
 
-        $hasRule = false;
-
-        $gte = $constants['GREATER_THAN_OR_EQUAL_TO'] ?? null;
-        $gt = $constants['GREATER_THAN'] ?? null;
-        $lt = $constants['LESS_THAN'] ?? null;
-        $lte = $constants['LESS_THAN_OR_EQUAL_TO'] ?? null;
-
-        if (isset($gte) && ! \is_int($gte)) {
-            throw new LogicException();
-        }
-        if (isset($gt) && ! \is_int($gt)) {
-            throw new LogicException();
-        }
-        if (isset($lt) && ! \is_int($lt)) {
-            throw new LogicException();
-        }
-        if (isset($lte) && ! \is_int($lte)) {
-            throw new LogicException();
-        }
-        if (isset($gte) || isset($gt) || isset($lt) || isset($lte)) {
-            $hasRule = true;
+        if (
+            \is_null($min = $constants['MIN'] ?? null)
+            && \is_null($max = $constants['MAX'] ?? null)
+        ) {
+            return false;
         }
 
-        return $hasRule ? new self($gte, $gt, $lt, $lte) : false;
+        return new self(min: $min, max: $max);
     }
 }
