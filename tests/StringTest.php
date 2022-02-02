@@ -9,7 +9,7 @@ use Stringable;
 
 final class StringTest extends TestCase
 {
-    // Mock classes used by tests are defined after this test class.
+    // The mock classes used in the tests are defined after this test class.
 
     public function test_validate()
     {

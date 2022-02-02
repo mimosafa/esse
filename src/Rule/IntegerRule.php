@@ -47,7 +47,7 @@ final class IntegerRule implements RuleInterface
      * Validates a given value with rules
      *
      * @param int $value
-     * @return boolean
+     * @return bool
      */
     public function validate($value): bool
     {

@@ -22,7 +22,7 @@ trait IntegerTrait
     /**
      * Gets the integer value.
      *
-     * @return integer
+     * @return int
      */
     public function value(): int
     {
@@ -33,7 +33,7 @@ trait IntegerTrait
      * Validates a type of a given value.
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateType($value): bool
     {

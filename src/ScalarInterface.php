@@ -3,47 +3,16 @@
 namespace Esse;
 
 /**
- * Pseudo scalar value interface
- *
- * @method mixed value()
- * @method bool isEqual(mixed $value)
- * @method bool isIdentical(mixed $value)
- * @method static bool validate(mixed $value)
- * @method static static from(mixed $value)
- * @method static static|null tryFrom(mixed $value)
+ * Scalar value object interface
  */
-interface ScalarInterface
+interface ScalarInterface extends ValueInterface
 {
     /**
      * Gets the scalar value.
      *
-     * @return mixed
+     * @return bool|int|float|string
      */
-    public function value();
-
-    /**
-     * Checks for equivalence with a given, only with their values.
-     *
-     * @param mixed $value
-     * @return boolean
-     */
-    public function isEqual($value): bool;
-
-    /**
-     * Checks for equivalence with a given, not only with their values but also their classes are strictly.
-     *
-     * @param mixed $value
-     * @return boolean
-     */
-    public function isIdentical($value): bool;
-
-    /**
-     * Validates a given value on a scalar.
-     *
-     * @param mixed $value
-     * @return boolean
-     */
-    public static function validate($value): bool;
+    public function value(): bool|int|float|string;
 
     /**
      * Gets an instance from a scalar value. If an invalid value is given, a ValueError will be thrown.

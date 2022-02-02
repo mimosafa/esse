@@ -29,7 +29,7 @@ trait EnumTrait
      * @uses \Esse\Util\EnumerateConstantsTrait::validateBackedValueForEnums()
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateType($value): bool
     {
@@ -40,7 +40,7 @@ trait EnumTrait
      * Validates a given value with the specific rule.
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateWithRule($value): bool
     {

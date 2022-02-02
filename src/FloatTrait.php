@@ -33,7 +33,7 @@ trait FloatTrait
      * Validates a type of a given value.
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateType($value): bool
     {
@@ -44,7 +44,7 @@ trait FloatTrait
      * Validates a given value with the specific rule.
      *
      * @param float $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateWithRule($value): bool
     {

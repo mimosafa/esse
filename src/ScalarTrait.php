@@ -11,65 +11,16 @@ use ValueError;
  */
 trait ScalarTrait
 {
-    /**
-     * Original scalar value
-     *
-     * @var mixed
-     */
-    protected $value;
+    use ValueTrait;
 
     /**
-     * Constructor
+     * Gets the scalar value.
      *
-     * @param mixed $value
-     * @return void
-     * @throws ValueError
+     * @return bool|int|float|string
      */
-    public function __construct($value)
-    {
-        $value = $value instanceof static ? $value->value() : $value;
-
-        if (! static::validate($value)) {
-            throw new ValueError();
-        }
-        $this->value = $value;
-    }
-
-    /**
-     * Gets the scalar value
-     *
-     * @return mixed
-     */
-    public function value()
+    public function value(): bool|int|float|string
     {
         return $this->value;
-    }
-
-    /**
-     * Checks for equivalence with a given, only with their values.
-     *
-     * @param mixed $value
-     * @return boolean
-     */
-    public function isEqual($value): bool
-    {
-        if ($value instanceof self) {
-            $value = $value->value();
-        }
-        return $this->value() === $value;
-    }
-
-    /**
-     * Checks for equivalence with a given, not only with their values but also their classes are strictly.
-     *
-     * @param mixed $value
-     * @return boolean
-     */
-    public function isIdentical($value): bool
-    {
-        return $value instanceof static
-            && $this->value() === $value->value()
-            && \get_called_class() === \get_class($value);
     }
 
     /**

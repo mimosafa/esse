@@ -50,7 +50,7 @@ trait StringTrait
      * Checks for equivalence with a given, only with their values.
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     public function isEqual($value): bool
     {
@@ -64,7 +64,7 @@ trait StringTrait
      * Validates a type of a given value.
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateType($value): bool
     {

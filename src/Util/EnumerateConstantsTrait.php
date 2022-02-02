@@ -59,7 +59,7 @@ trait EnumerateConstantsTrait
      * You CAN override this method.
      *
      * @param mixed $value
-     * @return boolean
+     * @return bool
      */
     protected static function validateBackedValueForEnums($value): bool
     {

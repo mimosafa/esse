@@ -20,7 +20,7 @@ final class StringRule implements RuleInterface
      * Validates a given value with rules
      *
      * @param string|Stringable $value
-     * @return boolean
+     * @return bool
      */
     public function validate($value): bool
     {

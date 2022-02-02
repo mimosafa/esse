@@ -6,10 +6,12 @@ namespace Esse;
  * Pseudo enumerations interface
  *
  * @see https://www.php.net/manual/en/class.unitenum.php
+ *
  * @property-read string $name  The case-sensitive name of the case itself.
  * @method static array<static> cases()
  *
  * @see https://www.php.net/manual/en/class.backedenum.php
+ *
  * @property-read mixed $value  The value specified in the definition.
  * @method static static from(mixed $value)
  * @method static static|null tryFrom(mixed $value)

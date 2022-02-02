@@ -20,7 +20,7 @@ final class FloatRule implements RuleInterface
      * Validates a given value with rules
      *
      * @param float $value
-     * @return boolean
+     * @return bool
      */
     public function validate($value): bool
     {
