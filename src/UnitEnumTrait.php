@@ -4,12 +4,11 @@ namespace Esse;
 
 use Error;
 use LogicException;
-use Throwable;
 use ValueError;
 
 trait UnitEnumTrait
 {
-    use StringTrait {
+    use ScalarTrait {
         value as protected;
     }
 
@@ -74,21 +73,21 @@ trait UnitEnumTrait
     {
         $class = \get_called_class();
         if (! isset(self::$casesCache[$class])) {
+
+            /**
+             * Regular expression for constant names.
+             *
+             * @see https://www.php.net/manual/en/language.constants.php
+             *
+             * @var string
+             */
+            $pattern = '/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/';
+
             $cases = [];
             foreach (static::toArray() as $name) {
                 if (! \is_string($name)) {
                     throw new LogicException();
                 }
-
-                /**
-                 * Regular expression for constant names.
-                 *
-                 * @see https://www.php.net/manual/en/language.constants.php
-                 *
-                 * @var string
-                 */
-                $pattern = '/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/';
-
                 if (! \preg_match($pattern, $name)) {
                     throw new LogicException();
                 }
@@ -103,6 +102,8 @@ trait UnitEnumTrait
     {
         if ($name === 'name') {
             /**
+             * Read-only property string $name
+             *
              * @see https://www.php.net/manual/en/language.enumerations.basics.php
              */
             return $this->value();
@@ -112,10 +113,9 @@ trait UnitEnumTrait
 
     public static function __callStatic($name, $arguments)
     {
-        try {
-            return new static($name);
-        } catch (Throwable $t) {
-            throw new Error(\sprintf('Call to undefined method %s::%s()', \get_called_class(), $name), previous: $t);
+        if (static::validate($name)) {
+            return static::all()[$name];
         }
+        throw new Error(\sprintf('Call to undefined method %s::%s()', \get_called_class(), $name));
     }
 }
