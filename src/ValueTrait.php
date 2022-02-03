@@ -47,7 +47,7 @@ trait ValueTrait
      */
     public function isEqual($value): bool
     {
-        return $this->value === ($value instanceof self ? $value->value() : $value);
+        return $this->isEqualOriginalValue($value instanceof self ? $value->value() : $value);
     }
 
     /**
@@ -58,7 +58,7 @@ trait ValueTrait
      */
     public function isIdentical($value): bool
     {
-        return $value instanceof static && \get_called_class() === \get_class($value) && $this->isEqual($value);
+        return $value instanceof static && \get_called_class() === \get_class($value) && $this->value === $value->value();
     }
 
     /**
@@ -70,4 +70,15 @@ trait ValueTrait
      * @return bool
      */
     abstract public static function validate($value): bool;
+
+    /**
+     * Checks for original values equivalence with a given.
+     *
+     * @param mixed $value
+     * @return bool
+     */
+    protected function isEqualOriginalValue($value): bool
+    {
+        return $this->value === $value;
+    }
 }

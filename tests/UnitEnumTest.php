@@ -12,7 +12,6 @@ namespace Esse\Tests {
         {
             $hearts = Suit::Hearts();
             $this->assertInstanceOf(Suit::class, $hearts);
-
             $this->assertTrue($hearts === Suit::Hearts());
 
             $this->expectException(Error::class);

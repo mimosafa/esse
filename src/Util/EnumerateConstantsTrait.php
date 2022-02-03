@@ -8,11 +8,11 @@ use ReflectionClass;
 trait EnumerateConstantsTrait
 {
     /**
-     * Enums cached on a class-by-class basis.
+     * Cache of enumerated constants on a class-by-class basis.
      *
      * @var array<string, array<string, mixed>>
      */
-    protected static $enumsCache = [];
+    protected static $enumeratedConstantsCache = [];
 
     /**
      * Gets enums as an array.
@@ -24,7 +24,7 @@ trait EnumerateConstantsTrait
     final public static function toArray(): array
     {
         $class = \get_called_class();
-        return self::$enumsCache[$class] ?? self::$enumsCache[$class] = static::expandConstantsToArray($class);
+        return self::$enumeratedConstantsCache[$class] ?? self::$enumeratedConstantsCache[$class] = static::expandConstantsToArray($class);
     }
 
     /**
