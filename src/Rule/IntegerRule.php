@@ -7,7 +7,7 @@ use LogicException;
 use ReflectionClass;
 use ValueError;
 
-final class IntegerRule implements RuleInterface
+class IntegerRule implements RuleInterface
 {
     /**
      * Constructor

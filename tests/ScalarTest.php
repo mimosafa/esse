@@ -1,30 +1,35 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests;
+namespace Esse\Tests {
 
-use Esse\ScalarInterface;
-use Esse\ScalarTrait;
-use PHPUnit\Framework\TestCase;
-use stdClass;
+    use Esse\Tests\ScalarTest\Mock;
+    use PHPUnit\Framework\TestCase;
+    use stdClass;
 
-final class ScalarTest extends TestCase
-{
-    // The mock class used in the tests are defined after this test class.
-
-    public function test_validate()
+    final class ScalarTest extends TestCase
     {
-        $valids = [ true, 0, 3090, 0.00234, M_PI, '', 'String', ];
+        public function test_validate()
+        {
+            $valids = [ true, 0, 3090, 0.00234, M_PI, '', 'String', ];
 
-        foreach ($valids as $valid) {
-            $this->assertTrue(ScalarTestMock::validate($valid));
-        }
+            foreach ($valids as $valid) {
+                $this->assertTrue(Mock::validate($valid));
+            }
 
-        $invalids = [ null, [1, 5, 'a'], new stdClass, (fn() => 'fn'), ];
+            $invalids = [ null, [1, 5, 'a'], new stdClass, (fn() => 'fn'), ];
 
-        foreach ($invalids as $invalid) {
-            $this->assertFalse(ScalarTestMock::validate($invalid));
+            foreach ($invalids as $invalid) {
+                $this->assertFalse(Mock::validate($invalid));
+            }
         }
     }
+
 }
 
-class ScalarTestMock implements ScalarInterface { use ScalarTrait; }
+namespace Esse\Tests\ScalarTest {
+
+    use Esse\ScalarInterface;
+    use Esse\ScalarTrait;
+
+    class Mock implements ScalarInterface { use ScalarTrait; }
+}

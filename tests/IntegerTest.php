@@ -1,27 +1,35 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests;
+namespace Esse\Tests {
 
-use Esse\IntegerInterface;
-use Esse\IntegerTrait;
-use PHPUnit\Framework\TestCase;
+    use Esse\Tests\IntegerTest\Mock;
+    use PHPUnit\Framework\TestCase;
 
-final class IntegerTest extends TestCase
-{
-    public function test_validate()
+    final class IntegerTest extends TestCase
     {
-        $valids = [ -3, 0, 1, 999999, 0x1A, 0b1101, \PHP_INT_MAX, ];
+        public function test_validate()
+        {
+            $valids = [ -3, 0, 1, 999999, 0x1A, 0b1101, \PHP_INT_MAX, ];
 
-        foreach ($valids as $valid) {
-            $this->assertTrue(IntegerTestMock::validate($valid));
-        }
+            foreach ($valids as $valid) {
+                $this->assertTrue(Mock::validate($valid));
+            }
 
-        $invalids = [ '1', 3.14, true, \M_PI, \INF, ];
+            $invalids = [ '1', 3.14, true, \M_PI, \INF, ];
 
-        foreach ($invalids as $invalid) {
-            $this->assertFalse(IntegerTestMock::validate($invalid));
+            foreach ($invalids as $invalid) {
+                $this->assertFalse(Mock::validate($invalid));
+            }
         }
     }
+
 }
 
-class IntegerTestMock implements IntegerInterface { use IntegerTrait; }
+namespace Esse\Tests\IntegerTest {
+
+    use Esse\IntegerInterface;
+    use Esse\IntegerTrait;
+
+    class Mock implements IntegerInterface { use IntegerTrait; }
+
+}

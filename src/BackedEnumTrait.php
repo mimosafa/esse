@@ -38,6 +38,13 @@ trait BackedEnumTrait
         $this->constructUnitEnum($value);
     }
 
+    /**
+     * Gets the case-sensitive name of the case itself.
+     *
+     * @access protected
+     *
+     * @return string
+     */
     protected function name(): string
     {
         return static::search($this->value());

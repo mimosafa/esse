@@ -7,7 +7,7 @@ use LogicException;
 use ReflectionClass;
 use ValueError;
 
-final class FloatRule implements RuleInterface
+class FloatRule implements RuleInterface
 {
     public function __construct(
         private ?bool $acceptNan = null,

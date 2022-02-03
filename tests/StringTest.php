@@ -1,29 +1,35 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests;
+namespace Esse\Tests {
 
-use Esse\StringInterface;
-use Esse\StringTrait;
-use PHPUnit\Framework\TestCase;
+    use Esse\Tests\StringTest\Mock;
+    use PHPUnit\Framework\TestCase;
 
-final class StringTest extends TestCase
-{
-    // The mock classes used in the tests are defined after this test class.
-
-    public function test_validate()
+    final class StringTest extends TestCase
     {
-        $valids = [ 'abcd', '', 'あいうえお', '1978', __CLASS__, ];
+        public function test_validate()
+        {
+            $valids = [ 'abcd', '', 'あいうえお', '1978', __CLASS__, ];
 
-        foreach ($valids as $valid) {
-            $this->assertTrue(StringTestMock::validate($valid));
-        }
+            foreach ($valids as $valid) {
+                $this->assertTrue(Mock::validate($valid));
+            }
 
-        $invalids = [ false, 0, 123.45, null, ];
+            $invalids = [ false, 0, 123.45, null, ];
 
-        foreach ($invalids as $invalid) {
-            $this->assertFalse(StringTestMock::validate($invalid));
+            foreach ($invalids as $invalid) {
+                $this->assertFalse(Mock::validate($invalid));
+            }
         }
     }
+
 }
 
-class StringTestMock implements StringInterface { use StringTrait; }
+namespace Esse\Tests\StringTest {
+
+    use Esse\StringInterface;
+    use Esse\StringTrait;
+
+    class Mock implements StringInterface { use StringTrait; }
+
+}
