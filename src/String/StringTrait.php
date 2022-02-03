@@ -4,9 +4,6 @@ namespace Esse\String;
 
 use Esse\Scalar\ScalarTrait;
 
-/**
- * @psalm-require-implements StringInterface
- */
 trait StringTrait
 {
     use ScalarTrait;

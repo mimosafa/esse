@@ -4,9 +4,6 @@ namespace Esse\Float;
 
 use Esse\Scalar\ScalarTrait;
 
-/**
- * @psalm-require-implements FloatInterface
- */
 trait FloatTrait
 {
     use ScalarTrait;

@@ -62,7 +62,7 @@ class StringRule implements RuleInterface
      */
     public static function init(string $class): self|false
     {
-        if (! \class_exists($class) || ! \in_array(StringInterface::class, \class_implements($class), true)) {
+        if (! \class_exists($class)) {
             throw new ValueError();
         }
         if (! $constants = (new ReflectionClass($class))->getConstants()) {

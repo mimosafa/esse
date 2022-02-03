@@ -6,8 +6,6 @@ use Esse\Scalar\ScalarTrait;
 
 /**
  * Pseudo enumerations trait
- *
- * @psalm-require-implements EnumInterface
  */
 trait EnumTrait
 {

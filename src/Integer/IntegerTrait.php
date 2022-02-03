@@ -4,9 +4,6 @@ namespace Esse\Integer;
 
 use Esse\Scalar\ScalarTrait;
 
-/**
- * @psalm-require-implements IntegerInterface
- */
 trait IntegerTrait
 {
     use ScalarTrait;
