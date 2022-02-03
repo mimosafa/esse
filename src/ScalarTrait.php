@@ -3,8 +3,6 @@
 namespace Esse;
 
 use Esse\Rule\RuleInterface;
-use Throwable;
-use ValueError;
 
 /**
  * @psalm-require-implements ScalarInterface
@@ -64,34 +62,5 @@ trait ScalarTrait
     protected static function rule(): RuleInterface|false
     {
         return false;
-    }
-
-    /**
-     * Gets an instance from a scalar value. If an invalid value is given, a ValueError will be thrown.
-     *
-     * @param mixed $value
-     * @return static
-     */
-    public static function from($value): static
-    {
-        return new static($value);
-    }
-
-    /**
-     * Gets an instance from a scalar value. If an invalid value is given, null is returned.
-     *
-     * @param mixed $value
-     * @return static|null
-     */
-    public static function tryFrom($value): ?static
-    {
-        try {
-            return static::from($value);
-        } catch (Throwable $e) {
-            if ($e instanceof ValueError) {
-                return null;
-            }
-            throw $e;
-        }
     }
 }

@@ -54,7 +54,7 @@ trait EnumTrait
      */
     public static function all(): array
     {
-        return \array_map([\get_called_class(), 'from'], static::toArray());
+        return \array_map(fn ($value) => new static($value), static::toArray());
     }
 
     /**

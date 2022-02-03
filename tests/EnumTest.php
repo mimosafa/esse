@@ -1,48 +1,46 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests;
+namespace Esse\Tests {
 
-use Esse\EnumInterface;
-use Esse\EnumTrait;
-use PHPUnit\Framework\TestCase;
+    use Esse\Tests\EnumTest\Suit;
+    use PHPUnit\Framework\TestCase;
 
-final class EnumTest extends TestCase
-{
-    public function test_name()
+    final class EnumTest extends TestCase
     {
-        $hearts = EnumTestSuit::from('H');
-        $this->assertEquals('Hearts', $hearts->name());
-        $this->assertEquals($hearts->name(), $hearts->name);
-    }
+        public function test_name()
+        {
+            $hearts = new Suit('H');
+            $this->assertEquals('Hearts', $hearts->name());
+        }
 
-    public function test_cases()
-    {
-        $cases = EnumTestSuit::cases();
-        $this->assertEquals(\array_values($cases), $cases);
+        public function test_all()
+        {
+            $all = Suit::all();
+            $array = Suit::toArray();
 
-        $array = \array_values(EnumTestSuit::toArray());
-        foreach ($cases as $i => $case) {
-            $this->assertEquals($array[$i], $case->value);
+            foreach ($all as $name => $case) {
+                $this->assertEquals($array[$name], $case->value());
+            }
         }
     }
 
-    public function test_all()
+}
+
+namespace Esse\Tests\EnumTest {
+
+    use Esse\EnumInterface;
+    use Esse\EnumTrait;
+
+    interface SuitInterface extends EnumInterface
     {
-        $all = EnumTestSuit::all();
-        $array = EnumTestSuit::toArray();
-
-        foreach ($all as $name => $case) {
-            $this->assertEquals($array[$name], $case->value);
-        }
+        const Hearts   = 'H';
+        const Diamonds = 'D';
+        const Clubs    = 'C';
+        const Spades   = 'S';
     }
-}
 
-interface EnumTestSuitInterface extends EnumInterface {
-    const Hearts   = 'H';
-    const Diamonds = 'D';
-    const Clubs    = 'C';
-    const Spades   = 'S';
-}
-class EnumTestSuit implements EnumTestSuitInterface {
-    use EnumTrait;
+    class Suit implements SuitInterface {
+        use EnumTrait;
+    }
+
 }

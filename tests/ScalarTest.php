@@ -6,7 +6,6 @@ use Esse\ScalarInterface;
 use Esse\ScalarTrait;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use ValueError;
 
 final class ScalarTest extends TestCase
 {
@@ -25,27 +24,6 @@ final class ScalarTest extends TestCase
         foreach ($invalids as $invalid) {
             $this->assertFalse(ScalarTestMock::validate($invalid));
         }
-    }
-
-    public function test_try_from()
-    {
-        $valid = ScalarTestMock::tryFrom('foo');
-        $this->assertInstanceOf(ScalarTestMock::class, $valid);
-        $this->assertEquals('foo', $valid->value());
-
-        $invalid = ScalarTestMock::tryFrom(['array', 'is', 'invalid']);
-        $this->assertNull($invalid);
-    }
-
-    public function test_from()
-    {
-        $valid = ScalarTestMock::from('bar');
-        $this->assertInstanceOf(ScalarTestMock::class, $valid);
-        $this->assertEquals('bar', $valid->value());
-
-        $this->expectException(ValueError::class);
-
-        $invalid = ScalarTestMock::from(['array', 'is', 'invalid']);
     }
 }
 
