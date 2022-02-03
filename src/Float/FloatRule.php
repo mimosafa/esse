@@ -9,11 +9,28 @@ use ValueError;
 
 class FloatRule implements RuleInterface
 {
+    /**
+     * Constructor
+     *
+     * @param bool|null $acceptNan
+     * @param bool|null $acceptInf
+     */
     public function __construct(
         private ?bool $acceptNan = null,
         private ?bool $acceptInf = null,
     )
     {
+        if (isset($acceptNan)) {
+            if (! \is_bool($acceptNan)) {
+                throw new LogicException();
+            }
+        }
+
+        if (isset($acceptInf)) {
+            if (! \is_bool($acceptInf)) {
+                throw new LogicException();
+            }
+        }
     }
 
     /**
@@ -28,10 +45,10 @@ class FloatRule implements RuleInterface
             throw new ValueError();
         }
 
-        if (! $this->acceptNan() && \is_nan($value)) {
+        if (\is_nan($value) && $this->acceptNan !== true) {
             return false;
         }
-        if (! $this->acceptInf() && \is_infinite($value)) {
+        if (\is_infinite($value) && $this->acceptInf !== true) {
             return false;
         }
 
@@ -53,43 +70,13 @@ class FloatRule implements RuleInterface
             return false;
         }
 
-        $hasRule = false;
-
-        $acceptNan = $constants['ACCEPT_NAN'] ?? null;
-        $acceptInf = $constants['ACCEPT_INF'] ?? null;
-
-        if (isset($acceptNan)) {
-            if (! \is_bool($acceptNan)) {
-                throw new LogicException();
-            }
-            if ($acceptNan === true) {
-                $hasRule = true;
-            } else {
-                $acceptNan = null;
-            }
+        if (
+            \is_null($acceptNan = $constants['ACCEPT_NAN'] ?? null)
+            && \is_null($acceptInf = $constants['ACCEPT_INF'] ?? null)
+        ) {
+            return false;
         }
 
-        if (isset($acceptInf)) {
-            if (! \is_bool($acceptInf)) {
-                throw new LogicException();
-            }
-            if ($acceptInf === true) {
-                $hasRule = true;
-            } else {
-                $acceptInf = null;
-            }
-        }
-
-        return $hasRule ? new self($acceptNan, $acceptInf) : false;
-    }
-
-    public function acceptNan(): bool
-    {
-        return $this->acceptNan === true;
-    }
-
-    public function acceptInf(): bool
-    {
-        return $this->acceptInf === true;
+        return new self($acceptNan, $acceptInf);
     }
 }
