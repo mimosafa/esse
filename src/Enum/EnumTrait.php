@@ -2,14 +2,14 @@
 
 namespace Esse\Enum;
 
-use Esse\Scalar\ScalarTrait;
+use Esse\Value\ValueTrait;
 
 /**
- * Pseudo enumerations trait
+ * Enumeration value object trait
  */
 trait EnumTrait
 {
-    use ScalarTrait, EnumerateConstantsTrait;
+    use ValueTrait;
 
     /**
      * Gets the case-sensitive name of the case itself.
@@ -22,25 +22,12 @@ trait EnumTrait
     }
 
     /**
-     * Validates a type of a given value.
-     *
-     * @uses \Esse\Util\EnumerateConstantsTrait::validateBackedValueForEnums()
+     * Validates a given value.
      *
      * @param mixed $value
      * @return bool
      */
-    protected static function validateType($value): bool
-    {
-        return static::validateBackedValueForEnums($value);
-    }
-
-    /**
-     * Validates a given value with the specific rule.
-     *
-     * @param mixed $value
-     * @return bool
-     */
-    protected static function validateWithRule($value): bool
+    public static function validate($value): bool
     {
         return \in_array($value, static::toArray(), true);
     }
@@ -54,6 +41,13 @@ trait EnumTrait
     {
         return \array_map(fn ($value) => new static($value), static::toArray());
     }
+
+    /**
+     * Generates a list of scalar values with the name as a key.
+     *
+     * @return array<string, mixed>
+     */
+    abstract public static function toArray(): array;
 
     /**
      * Searches the enums for a given value and returns the name if successful.

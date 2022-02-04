@@ -2,22 +2,13 @@
 
 namespace Esse\Enum;
 
-use Esse\Scalar\ScalarInterface;
+use Esse\Value\ValueInterface;
 
 /**
- * Enumration value object interface
+ * Enumeration value object interface
  */
-interface EnumInterface extends ScalarInterface
+interface EnumInterface extends ValueInterface
 {
-    #
-    # To define a scalar equivalent for an Enumeration, the syntax is as follows:
-    #
-    # const Hearts = 'H';
-    # const Diamonds = 'D';
-    # const Clubs = 'C';
-    # const Spades = 'S';
-    #
-
     /**
      * Gets the case-sensitive name of the case itself.
      *

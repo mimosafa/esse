@@ -3,13 +3,13 @@
 namespace Esse\Enum;
 
 use Error;
-use Esse\Scalar\ScalarTrait;
+use Esse\Value\ValueTrait;
 use LogicException;
 use ValueError;
 
 trait UnitEnumTrait
 {
-    use ScalarTrait {
+    use ValueTrait {
         value as protected;
     }
 
