@@ -41,6 +41,8 @@ class StringRule implements RuleInterface
      *
      * @param bool|null $multibyte
      * @param string|null $regexPattern
+     * @param int|null $minLength
+     * @param int|null $maxLength
      */
     public function __construct(
         private ?bool $multibyte = null,
@@ -49,15 +51,11 @@ class StringRule implements RuleInterface
         private ?int $maxLength = null,
     )
     {
-        if (isset($multibyte)) {
-            if (! \is_bool($multibyte)) {
-                throw new LogicException();
-            }
+        if (isset($multibyte) && ! \is_bool($multibyte)) {
+            throw new LogicException();
         }
-        if (isset($regexPattern)) {
-            if (@\preg_match($regexPattern, '') === false) {
-                throw new LogicException();
-            }
+        if (isset($regexPattern) && @\preg_match($regexPattern, '') === false) {
+            throw new LogicException();
         }
         if (isset($minLength) && $minLength <= 0) {
             throw new LogicException();

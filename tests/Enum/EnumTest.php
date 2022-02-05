@@ -7,7 +7,7 @@ namespace Esse\Tests\Enum {
     use PHPUnit\Framework\TestCase;
     use ValueError;
 
-final class EnumTest extends TestCase
+    final class EnumTest extends TestCase
     {
         public function test_value_and_name_and_equivalance()
         {

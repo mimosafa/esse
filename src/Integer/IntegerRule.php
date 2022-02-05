@@ -10,6 +10,31 @@ use ValueError;
 class IntegerRule implements RuleInterface
 {
     /**
+     * Initializes validation rules from constants of a given class.
+     *
+     * @param string $class
+     * @return self|false
+     */
+    public static function init(string $class): self|false
+    {
+        if (! \class_exists($class)) {
+            throw new ValueError();
+        }
+        if (! $constants = (new ReflectionClass($class))->getConstants()) {
+            return false;
+        }
+
+        if (
+            \is_null($min = $constants['MIN'] ?? null)
+            && \is_null($max = $constants['MAX'] ?? null)
+        ) {
+            return false;
+        }
+
+        return new self(min: $min, max: $max);
+    }
+
+    /**
      * Constructor
      *
      * @param int|null $min
@@ -45,30 +70,5 @@ class IntegerRule implements RuleInterface
         }
 
         return true;
-    }
-
-    /**
-     * Initializes validation rules from constants of a given class.
-     *
-     * @param string $class
-     * @return self|false
-     */
-    public static function init(string $class): self|false
-    {
-        if (! \class_exists($class)) {
-            throw new ValueError();
-        }
-        if (! $constants = (new ReflectionClass($class))->getConstants()) {
-            return false;
-        }
-
-        if (
-            \is_null($min = $constants['MIN'] ?? null)
-            && \is_null($max = $constants['MAX'] ?? null)
-        ) {
-            return false;
-        }
-
-        return new self(min: $min, max: $max);
     }
 }
