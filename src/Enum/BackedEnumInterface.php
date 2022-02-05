@@ -16,16 +16,16 @@ interface BackedEnumInterface extends UnitEnumInterface
     /**
      * Maps a scalar to an enum instance
      *
-     * @param mixed $value
+     * @param int|string $value
      * @return static
      */
-    public static function from($value): static;
+    public static function from(int|string $value): static;
 
     /**
      * Maps a scalar to an enum instance or null
      *
-     * @param mixed $value
+     * @param int|string $value
      * @return static|null
      */
-    public static function tryFrom($value): ?static;
+    public static function tryFrom(int|string $value): ?static;
 }

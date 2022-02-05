@@ -34,23 +34,32 @@ trait UnitEnumTrait
     /**
      * Constructor
      *
+     * @final
+     *
      * @access protected
      *
      * @param string $value
      */
-    protected function __construct(string $value)
+    final protected function __construct(string $value)
     {
-        if (! static::validate($value)) {
+        if (static::validate($value)) {
+            $this->value = $value;
+        } else {
             throw new ValueError();
         }
-        $this->value = $value;
     }
 
     /**
+     * Validates a given value.
+     *
+     * @final
+     *
+     * @access protected
+     *
      * @param string $value
      * @return bool
      */
-    protected static function validate($value): bool
+    final protected static function validate($value): bool
     {
         return \in_array($value, static::toArray(), true);
     }
@@ -58,19 +67,25 @@ trait UnitEnumTrait
     /**
      * Generates a list of cases on an enum.
      *
+     * @final
+     *
      * @return array<static>
      */
-    public static function cases(): array
+    final public static function cases(): array
     {
         return \array_values(static::all());
     }
 
     /**
+     * Generates a list of cases on an enum with the name as a key.
+     *
+     * @final
+     *
      * @access protected
      *
      * @return array<string, static>
      */
-    protected static function all(): array
+    final protected static function all(): array
     {
         $class = \get_called_class();
         if (! isset(self::$casesCache[$class])) {

@@ -26,11 +26,13 @@ trait BackedEnumTrait
     /**
      * Constructor
      *
+     * @final
+     *
      * @access protected
      *
      * @param mixed $value
      */
-    protected function __construct($value)
+    final protected function __construct($value)
     {
         if (! \is_scalar($value)) {
             throw new ValueError();
@@ -51,11 +53,15 @@ trait BackedEnumTrait
     }
 
     /**
+     * Generates a list of cases on an enum with the name as a key.
+     *
+     * @final
+     *
      * @access protected
      *
      * @return array<string, static>
      */
-    protected static function all(): array
+    final protected static function all(): array
     {
         $class = \get_called_class();
         if (! isset(self::$casesCache[$class])) {
@@ -90,11 +96,11 @@ trait BackedEnumTrait
     /**
      * Maps a scalar to an enum instance
      *
-     * @param mixed $value
+     * @param int|string $value
      * @return static
      * @throws ValueError
      */
-    public static function from($value): static
+    public static function from(int|string $value): static
     {
         if (! $instance = static::tryFrom($value)) {
             throw new ValueError();
@@ -105,10 +111,10 @@ trait BackedEnumTrait
     /**
      * Maps a scalar to an enum instance or null
      *
-     * @param mixed $value
+     * @param int|string $value
      * @return static|null
      */
-    public static function tryFrom($value): ?static
+    public static function tryFrom(int|string $value): ?static
     {
         return ($name = static::search($value)) ? static::all()[$name] : null;
     }
