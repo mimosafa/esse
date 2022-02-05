@@ -30,9 +30,9 @@ trait BackedEnumTrait
      *
      * @access protected
      *
-     * @param mixed $value
+     * @param int|string $value
      */
-    final protected function __construct($value)
+    final protected function __construct(int|string $value)
     {
         if (! \is_scalar($value)) {
             throw new ValueError();
@@ -96,11 +96,13 @@ trait BackedEnumTrait
     /**
      * Maps a scalar to an enum instance
      *
+     * @final
+     *
      * @param int|string $value
      * @return static
      * @throws ValueError
      */
-    public static function from(int|string $value): static
+    final public static function from(int|string $value): static
     {
         if (! $instance = static::tryFrom($value)) {
             throw new ValueError();
@@ -111,21 +113,27 @@ trait BackedEnumTrait
     /**
      * Maps a scalar to an enum instance or null
      *
+     * @final
+     *
      * @param int|string $value
      * @return static|null
      */
-    public static function tryFrom(int|string $value): ?static
+    final public static function tryFrom(int|string $value): ?static
     {
         return ($name = static::search($value)) ? static::all()[$name] : null;
     }
 
     /**
+     * Searches the name-value array for a given value and returns the name if successful.
+     *
+     * @final
+     *
      * @access protected
      *
      * @param mixed $value
      * @return string|false
      */
-    protected static function search($value): string|false
+    final protected static function search($value): string|false
     {
         return \array_search($value, static::toArray(), true);
     }

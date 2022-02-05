@@ -3,6 +3,8 @@
 namespace Esse\Enum;
 
 use Esse\Value\ValueTrait;
+use Throwable;
+use ValueError;
 
 /**
  * Enumeration value object trait
@@ -50,7 +52,7 @@ trait EnumTrait
     abstract public static function toArray(): array;
 
     /**
-     * Searches the enums for a given value and returns the name if successful.
+     * Searches the name-value array for a given value and returns the name if successful.
      *
      * @access protected
      *
@@ -60,5 +62,60 @@ trait EnumTrait
     protected static function search($value): string|false
     {
         return static::validate($value) ? \array_search($value, static::toArray(), true) : false;
+    }
+
+    /**
+     * Maps a scalar to an enum instance
+     *
+     * @param mixed $value
+     * @return static
+     */
+    public static function from($value): static
+    {
+        return new static($value);
+    }
+
+    /**
+     * Maps a scalar to an enum instance or null
+     *
+     * @param mixed $value
+     * @return static|null
+     */
+    public static function tryFrom($value): ?static
+    {
+        try {
+            return static::from($value);
+        } catch (Throwable $th) {
+            if ($th instanceof ValueError) {
+                return null;
+            }
+            throw $th;
+        }
+    }
+
+    /**
+     * Maps a name string to an enum instance
+     *
+     * @param string $name
+     * @return static
+     */
+    public static function for(string $name): static
+    {
+        if ($instance = static::tryFor($name)) {
+            return $instance;
+        }
+        throw new ValueError();
+    }
+
+    /**
+     * Maps a name string to an enum instance or null
+     *
+     * @param string $name
+     * @return static|null
+     */
+    public static function tryFor(string $name): ?static
+    {
+        $value = static::toArray()[$name] ?? null;
+        return $value ? new static($value) : $value;
     }
 }

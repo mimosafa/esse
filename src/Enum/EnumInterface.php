@@ -29,4 +29,36 @@ interface EnumInterface extends ValueInterface
      * @return array<string, mixed>
      */
     public static function toArray(): array;
+
+    /**
+     * Maps a scalar to an enum instance
+     *
+     * @param mixed $value
+     * @return static
+     */
+    public static function from($value): static;
+
+    /**
+     * Maps a scalar to an enum instance or null
+     *
+     * @param mixed $value
+     * @return static|null
+     */
+    public static function tryFrom($value): ?static;
+
+    /**
+     * Maps a name string to an enum instance
+     *
+     * @param string $name
+     * @return static
+     */
+    public static function for(string $name): static;
+
+    /**
+     * Maps a name string to an enum instance or null
+     *
+     * @param string $name
+     * @return static|null
+     */
+    public static function tryFor(string $name): ?static;
 }

@@ -58,9 +58,7 @@ trait ValueTrait
      */
     public function isIdentical($value): bool
     {
-        return $value instanceof static
-            && \get_called_class() === \get_class($value)
-            && $this->isIdenticalOriginalValue($value->value());
+        return $value instanceof static && \get_called_class() === \get_class($value) && $this->isIdenticalOriginalValue($value->value());
     }
 
     /**
@@ -81,7 +79,7 @@ trait ValueTrait
      */
     protected function isEqualOriginalValue($value): bool
     {
-        return $this->isIdenticalOriginalValue($value);
+        return $this->value === $value;
     }
 
     /**
