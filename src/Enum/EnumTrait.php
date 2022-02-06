@@ -116,6 +116,6 @@ trait EnumTrait
     public static function tryFor(string $name): ?static
     {
         $value = static::toArray()[$name] ?? null;
-        return $value ? new static($value) : $value;
+        return isset($value) ? new static($value) : $value;
     }
 }
