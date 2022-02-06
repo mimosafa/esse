@@ -2,7 +2,7 @@
 
 namespace Esse\Integer;
 
-use Esse\RuleInterface;
+use Esse\Scalar\RuleInterface;
 use LogicException;
 use ReflectionClass;
 use ValueError;
