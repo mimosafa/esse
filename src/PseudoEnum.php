@@ -54,8 +54,10 @@ use Esse\Enum\EnumTrait;
  * @method static bool validate(mixed $value)       Validates a scalar as enumeration value.
  * @method bool|int|float|string value()            Returns the original scalar value.
  * @method string name()                            Returns the name of enumeration value.
- * @method bool isEqual(mixed $value)               Checks for equivalence with a given, only with their values.
- * @method bool isIdentical(mixed $value)           Checks for equivalence with a given, not only with their values but also their classes are strictly.
+ * @method bool isEqual(mixed $value)               Checks for equivalence with a given,
+ *                                                  only with their values.
+ * @method bool isIdentical(mixed $value)           Checks for equivalence with a given,
+ *                                                  not only with their values but also their classes are strictly.
  */
 abstract class PseudoEnum implements EnumInterface
 {
