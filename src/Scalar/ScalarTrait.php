@@ -2,7 +2,6 @@
 
 namespace Esse\Scalar;
 
-use Esse\RuleInterface;
 use Esse\Value\ValueTrait;
 
 trait ScalarTrait

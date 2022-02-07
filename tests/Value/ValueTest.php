@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Value {
-
+namespace Esse\Tests\Value
+{
     use Esse\Tests\Value\ValueTest\InheritedMock;
     use Esse\Tests\Value\ValueTest\Mock;
     use PHPUnit\Framework\TestCase;
@@ -77,11 +77,10 @@ namespace Esse\Tests\Value {
             $this->assertFalse($inherited->isIdentical($instance));
         }
     }
-
 }
 
-namespace Esse\Tests\Value\ValueTest {
-
+namespace Esse\Tests\Value\ValueTest
+{
     use Esse\Value\ValueInterface;
     use Esse\Value\ValueTrait;
 
@@ -92,5 +91,4 @@ namespace Esse\Tests\Value\ValueTest {
     }
 
     class InheritedMock extends Mock {}
-
 }

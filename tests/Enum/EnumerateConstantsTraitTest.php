@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Enum {
-
+namespace Esse\Tests\Enum
+{
     use Esse\Tests\Enum\EnumerateConstantsTraitTest\AbstractEnumerateConstants;
     use Esse\Tests\Enum\EnumerateConstantsTraitTest\EnumerateConstantsA;
     use LogicException;
@@ -63,11 +63,10 @@ namespace Esse\Tests\Enum {
             $instance->toArray();
         }
     }
-
 }
 
-namespace Esse\Tests\Enum\EnumerateConstantsTraitTest {
-
+namespace Esse\Tests\Enum\EnumerateConstantsTraitTest
+{
     use Esse\Enum\EnumerateConstantsTrait;
 
     abstract class AbstractEnumerateConstants { use EnumerateConstantsTrait; }
@@ -78,5 +77,4 @@ namespace Esse\Tests\Enum\EnumerateConstantsTraitTest {
         const two   = 2;
         const three = 3;
     }
-
 }

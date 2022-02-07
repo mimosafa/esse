@@ -1,6 +1,6 @@
 <?php
 
-namespace Esse;
+namespace Esse\Scalar;
 
 interface RuleInterface
 {

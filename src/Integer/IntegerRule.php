@@ -2,7 +2,7 @@
 
 namespace Esse\Integer;
 
-use Esse\RuleInterface;
+use Esse\Scalar\RuleInterface;
 use LogicException;
 use ReflectionClass;
 use ValueError;
@@ -24,10 +24,10 @@ class IntegerRule implements RuleInterface
             return false;
         }
 
-        if (
-            \is_null($min = $constants['MIN'] ?? null)
-            && \is_null($max = $constants['MAX'] ?? null)
-        ) {
+        $min = $constants['MIN'] ?? null;
+        $max = $constants['MAX'] ?? null;
+
+        if (\is_null($min) && \is_null($max)) {
             return false;
         }
 

@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Scalar {
-
+namespace Esse\Tests\Scalar
+{
     use Esse\Tests\Scalar\ScalarTest\Mock;
     use PHPUnit\Framework\TestCase;
     use stdClass;
@@ -23,11 +23,10 @@ namespace Esse\Tests\Scalar {
             }
         }
     }
-
 }
 
-namespace Esse\Tests\Scalar\ScalarTest {
-
+namespace Esse\Tests\Scalar\ScalarTest
+{
     use Esse\Scalar\ScalarInterface;
     use Esse\Scalar\ScalarTrait;
 

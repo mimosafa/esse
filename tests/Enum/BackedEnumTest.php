@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Enum {
-
+namespace Esse\Tests\Enum
+{
     use Esse\Tests\Enum\BackedEnumTest\Suit;
     use PHPUnit\Framework\TestCase;
     use ValueError;
@@ -34,11 +34,10 @@ namespace Esse\Tests\Enum {
             $this->assertNull(Suit::tryFrom('J'));
         }
     }
-
 }
 
-namespace Esse\Tests\Enum\BackedEnumTest {
-
+namespace Esse\Tests\Enum\BackedEnumTest
+{
     use Esse\Enum\BackedEnumInterface;
     use Esse\Enum\BackedEnumTrait;
 
@@ -61,5 +60,4 @@ namespace Esse\Tests\Enum\BackedEnumTest {
             ];
         }
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace Esse\String;
 
-use Esse\RuleInterface;
+use Esse\Scalar\RuleInterface;
 use LogicException;
 use ReflectionClass;
 use ValueError;
@@ -24,12 +24,12 @@ class StringRule implements RuleInterface
             return false;
         }
 
-        if (
-            \is_null($multibyte = $constants['MULTIBYTE'] ?? null)
-            && \is_null($regexPattern = $constants['REGEX_PATTERN'] ?? null)
-            && \is_null($minLength = $constants['MIN_LENGTH'] ?? null)
-            && \is_null($maxLength = $constants['MAX_LENGTH'] ?? null)
-        ) {
+        $multibyte = $constants['MULTIBYTE'] ?? null;
+        $regexPattern = $constants['REGEX_PATTERN'] ?? null;
+        $minLength = $constants['MIN_LENGTH'] ?? null;
+        $maxLength = $constants['MAX_LENGTH'] ?? null;
+
+        if (\is_null($multibyte) && \is_null($regexPattern) && \is_null($minLength) && \is_null($maxLength)) {
             return false;
         }
 
