@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Float {
-
+namespace Esse\Tests\Float
+{
     use Esse\Tests\Float\FloatTest\Mock;
     use PHPUnit\Framework\TestCase;
 
@@ -22,14 +22,12 @@ namespace Esse\Tests\Float {
             }
         }
     }
-
 }
 
-namespace Esse\Tests\Float\FloatTest {
-
+namespace Esse\Tests\Float\FloatTest
+{
     use Esse\Float\FloatInterface;
     use Esse\Float\FloatTrait;
 
     class Mock implements FloatInterface { use FloatTrait; }
-
 }

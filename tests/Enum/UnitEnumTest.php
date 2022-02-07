@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Enum {
-
+namespace Esse\Tests\Enum
+{
     use Error;
     use Esse\Tests\Enum\UnitEnumTest\Suit;
     use PHPUnit\Framework\TestCase;
@@ -31,11 +31,10 @@ namespace Esse\Tests\Enum {
             $this->assertEquals($expects, $cases);
         }
     }
-
 }
 
-namespace Esse\Tests\Enum\UnitEnumTest {
-
+namespace Esse\Tests\Enum\UnitEnumTest
+{
     use Esse\Enum\UnitEnumInterface;
     use Esse\Enum\UnitEnumTrait;
 
@@ -53,5 +52,4 @@ namespace Esse\Tests\Enum\UnitEnumTest {
             return [ 'Hearts', 'Diamonds', 'Clubs', 'Spades', ];
         }
     }
-
 }

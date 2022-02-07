@@ -24,10 +24,10 @@ class FloatRule implements RuleInterface
             return false;
         }
 
-        if (
-            \is_null($acceptNan = $constants['ACCEPT_NAN'] ?? null)
-            && \is_null($acceptInf = $constants['ACCEPT_INF'] ?? null)
-        ) {
+        $acceptNan = $constants['ACCEPT_NAN'] ?? null;
+        $acceptInf = $constants['ACCEPT_INF'] ?? null;
+
+        if (\is_null($acceptNan) && \is_null($acceptInf)) {
             return false;
         }
 

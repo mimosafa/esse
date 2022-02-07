@@ -7,7 +7,7 @@ use Esse\Enum\EnumInterface;
 use Esse\Enum\EnumTrait;
 
 /**
- * Abstract pseudo enumeration value object class.
+ * Abstract pseudo-enumeration type value object class.
  *
  * To define a scalar equivalent for an Enumeration, the syntax is as follows:
  *
@@ -43,15 +43,14 @@ use Esse\Enum\EnumTrait;
  * }
  * ```
  *
- * To generate instance with values(e.g. 'H'):
- * @method static static from(mixed $value)         Throws ValueError if an invalid value given.
- * @method static static|null tryFrom(mixed $value) Returns null if an invalid value given.
- *
- * To generate instance with names(e.g. 'Hearts'):
- * @method static static for(mixed $value)          Throws ValueError if an invalid value given.
- * @method static static|null tryFor(mixed $value)  Returns null if an invalid value given.
- *
- * Other methods:
+ * @method static static from(mixed $value)         Generates an instance with a value(e.g. 'H').
+ *                                                  Throws ValueError if an invalid value given.
+ * @method static static|null tryFrom(mixed $value) Generates an instance with a value(e.g. 'H').
+ *                                                  Returns null if an invalid value given.
+ * @method static static for(mixed $value)          Generates an instance with a name(e.g. 'Hearts').
+ *                                                  Throws ValueError if an invalid value given.
+ * @method static static|null tryFor(mixed $value)  Generates an instance with a name(e.g. 'Hearts').
+ *                                                  Returns null if an invalid value given.
  * @method static bool validate(mixed $value)       Validates a scalar as enumeration value.
  * @method bool|int|float|string value()            Returns the original scalar value.
  * @method string name()                            Returns the name of enumeration value.
@@ -60,10 +59,23 @@ use Esse\Enum\EnumTrait;
  */
 abstract class PseudoEnum implements EnumInterface
 {
-    use EnumTrait, EnumerateConstantsTrait;
+    use EnumTrait {
+        __construct as protected;
+    }
+    use EnumerateConstantsTrait;
 
+    /**
+     * The name list of constants defined as enums.
+     *
+     * @var array<string>
+     */
     protected static $included = [];
 
+    /**
+     * The name list of constants NOT defined as enums.
+     *
+     * @var array<string>
+     */
     protected static $excluded = [];
 
     protected static function includedConstantsInEnums(): array

@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\String {
-
+namespace Esse\Tests\String
+{
     use Esse\Tests\String\StringTest\Mock;
     use PHPUnit\Framework\TestCase;
 
@@ -22,14 +22,12 @@ namespace Esse\Tests\String {
             }
         }
     }
-
 }
 
-namespace Esse\Tests\String\StringTest {
-
+namespace Esse\Tests\String\StringTest
+{
     use Esse\String\StringInterface;
     use Esse\String\StringTrait;
 
     class Mock implements StringInterface { use StringTrait; }
-
 }

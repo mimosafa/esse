@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Enum {
-
+namespace Esse\Tests\Enum
+{
     use Esse\Tests\Enum\EnumTest\Suit;
     use Esse\Tests\Enum\EnumTest\SuitDefinedConstants;
     use PHPUnit\Framework\TestCase;
@@ -74,11 +74,10 @@ namespace Esse\Tests\Enum {
             }
         }
     }
-
 }
 
-namespace Esse\Tests\Enum\EnumTest {
-
+namespace Esse\Tests\Enum\EnumTest
+{
     use Esse\Enum\EnumerateConstantsTrait;
     use Esse\Enum\EnumInterface;
     use Esse\Enum\EnumTrait;
@@ -104,5 +103,4 @@ namespace Esse\Tests\Enum\EnumTest {
         const Clubs = 'C';
         const Spades = 'S';
     }
-
 }

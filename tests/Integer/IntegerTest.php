@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Esse\Tests\Integer {
-
+namespace Esse\Tests\Integer
+{
     use Esse\Tests\Integer\IntegerTest\Mock;
     use PHPUnit\Framework\TestCase;
 
@@ -22,14 +22,12 @@ namespace Esse\Tests\Integer {
             }
         }
     }
-
 }
 
-namespace Esse\Tests\Integer\IntegerTest {
-
+namespace Esse\Tests\Integer\IntegerTest
+{
     use Esse\Integer\IntegerInterface;
     use Esse\Integer\IntegerTrait;
 
     class Mock implements IntegerInterface { use IntegerTrait; }
-
 }
