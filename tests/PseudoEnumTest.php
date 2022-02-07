@@ -2,7 +2,6 @@
 
 namespace Esse\Tests
 {
-
     use Esse\Tests\PseudoEnumTest\Description;
     use Esse\Tests\PseudoEnumTest\Progress;
     use Esse\Tests\PseudoEnumTest\Suit;

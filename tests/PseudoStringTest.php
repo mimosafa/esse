@@ -2,11 +2,9 @@
 
 namespace Esse\Tests
 {
-
     use Esse\Tests\PseudoStringTest\Password;
     use Esse\Tests\PseudoStringTest\UserName;
     use PHPUnit\Framework\TestCase;
-    use ValueError;
 
     final class PseudoStringTest extends TestCase
     {
@@ -25,32 +23,11 @@ namespace Esse\Tests
             $this->assertTrue(UserName::validate('abcdefghijkemnop'));
             $this->assertFalse(UserName::validate('abcdefghijkemnopq'));
         }
-
-        public function test_from()
-        {
-            $password = Password::from('Password');
-            $this->assertInstanceOf(Password::class, $password);
-            $this->assertEquals('Password', $password->value());
-        }
-
-        public function test_fail_from()
-        {
-            $this->expectException(ValueError::class);
-            Password::from('Ｐａｓｓｗｏｒｄ');
-        }
-
-        public function test_try_from()
-        {
-            $userName = UserName::tryFrom('mimosafa');
-            $this->assertInstanceOf(UserName::class, $userName);
-            $this->assertNull(UserName::tryFrom('mi-mo?sa!fa'));
-        }
     }
 }
 
 namespace Esse\Tests\PseudoStringTest
 {
-
     use Esse\PseudoString;
 
     class Password extends PseudoString

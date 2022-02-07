@@ -2,7 +2,6 @@
 
 namespace Esse\Tests
 {
-
     use Esse\Tests\PseudoIntegerTest\Rating;
     use PHPUnit\Framework\TestCase;
 
