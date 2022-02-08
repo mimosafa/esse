@@ -23,6 +23,20 @@ use Esse\Value\InstanceFromValueTrait;
  *     // @var true
  *     const ACCEPT_INF = true;
  * }
+ *
+ * class Distance extends PseudoFloat
+ * {
+ *     // @var int|float
+ *     const GREATER_THAN_OR_EQUAL_TO = 0;
+ *     const LESS_THAN_OR_EQUAL_TO = 42.195;
+ * }
+ *
+ * class TemperatureAsLiquid extends PseudoFloat
+ * {
+ *     // @var int|float
+ *     const GREATER_THAN = 0;
+ *     const LESS_THAN = 100;
+ * }
  * ```
  *
  * @method static static from(mixed $value)         Generates an instance with a value.
