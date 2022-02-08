@@ -8,9 +8,7 @@ use ValueError;
 
 trait BackedEnumTrait
 {
-    use UnitEnumTrait {
-        __construct as constructUnitEnum;
-    }
+    use UnitEnumTrait;
 
     /**
      * Provides names and values of backed enumeration cases.
@@ -34,7 +32,11 @@ trait BackedEnumTrait
      */
     final protected function __construct(int|string $value)
     {
-        $this->constructUnitEnum($value);
+        if (static::validate($value)) {
+            $this->value = $value;
+        } else {
+            throw new ValueError();
+        }
     }
 
     /**

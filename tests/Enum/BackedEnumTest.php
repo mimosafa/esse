@@ -2,6 +2,7 @@
 
 namespace Esse\Tests\Enum
 {
+    use Esse\Tests\Enum\BackedEnumTest\State;
     use Esse\Tests\Enum\BackedEnumTest\Suit;
     use PHPUnit\Framework\TestCase;
     use ValueError;
@@ -33,6 +34,12 @@ namespace Esse\Tests\Enum
 
             $this->assertNull(Suit::tryFrom('J'));
         }
+
+        public function test_integer_value()
+        {
+            $active = State::active();
+            $this->assertEquals(1, $active->value);
+        }
     }
 }
 
@@ -57,6 +64,18 @@ namespace Esse\Tests\Enum\BackedEnumTest
                 'Diamonds' => 'D',
                 'Clubs' => 'C',
                 'Spades' => 'S',
+            ];
+        }
+    }
+
+    class State implements BackedEnumInterface
+    {
+        use BackedEnumTrait;
+        protected static function toArray(): array
+        {
+            return [
+                'inactive' => 0,
+                'active' => 1,
             ];
         }
     }
