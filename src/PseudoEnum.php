@@ -21,6 +21,12 @@ use Esse\Enum\EnumTrait;
  *     const Clubs = 'C';
  *     const Spades = 'S';
  * }
+ * // Gets a instance with a value.
+ * $hearts = Suit::from('H');
+ * $hearts->name(); // 'Hearts'
+ * // Gets a instance with a name.
+ * $spades = Suit::for('Spades');
+ * $spades->value(); // 'S'
  * ```
  *
  * If there are constants that are not included in the Enumeration, there are two ways:
@@ -41,6 +47,25 @@ use Esse\Enum\EnumTrait;
  *     // or
  *     // protected static $excluded = ['NOT_ENUMERATION'];
  * }
+ * Suit::tryFrom('not_enumeration'); // null
+ * ```
+ *
+ * If you want to correct the value to a singleton as in the native Enum:
+ *
+ * ```
+ * <?php
+ * use Esse\PseudoEnum;
+ * class Suit extends PseudoEnum
+ * {
+ *     const Hearts = 'H';
+ *     const Diamonds = 'D';
+ *     const Clubs = 'C';
+ *     const Spades = 'S';
+ *
+ *     protected static $singleton = true; // Add line.
+ * }
+ * $diamonds = Suit::from('D');
+ * $diamonds === Suit::for('Diamonds'); // true
  * ```
  *
  * @method static static from(mixed $value)         Generates an instance with a value(e.g. 'H').
@@ -80,6 +105,13 @@ abstract class PseudoEnum implements EnumInterface
      */
     protected static $excluded = [];
 
+    /**
+     * Whether the enumerations is singleton value or not in static class.
+     *
+     * @return bool
+     */
+    protected static $singleton = false;
+
     protected static function includedConstantsInEnums(): array
     {
         return static::$included;
@@ -88,5 +120,10 @@ abstract class PseudoEnum implements EnumInterface
     protected static function excludedConstantsFromEnums(): array
     {
         return static::$excluded;
+    }
+
+    protected static function isSingleton(): bool
+    {
+        return static::$singleton;
     }
 }

@@ -29,6 +29,11 @@ use Esse\Value\InstanceFromValueTrait;
  *     // @var int
  *     const MAX_LENGTH = 16;
  * }
+ * UserName::validate('mimosafa'); // true
+ * UserName::validate('みもさふぁ'); // false
+ * UserName::from('m!mosa?a'); // Error
+ * UserName::tryFrom('mimosa'); // null
+ * UserName::from('mimoto-toshimichi'); // Error
  * ```
  *
  * @method static static from(mixed $value)         Generates an instance with a value.

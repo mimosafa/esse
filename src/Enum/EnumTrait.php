@@ -14,6 +14,13 @@ trait EnumTrait
     use ValueTrait;
 
     /**
+     * Cache of singleton enumeration values on a class-by-class basis.
+     *
+     * @var array<string, array<string, static>>
+     */
+    protected static $enumerationsCache = [];
+
+    /**
      * Gets the case-sensitive name of the case itself.
      *
      * @return string
@@ -41,6 +48,11 @@ trait EnumTrait
      */
     public static function all(): array
     {
+        if (static::isSingleton()) {
+            $class = \get_called_class();
+            return self::$enumerationsCache[$class]
+                ?? self::$enumerationsCache[$class] = \array_map(fn ($value) => new static($value), static::toArray());
+        }
         return \array_map(fn ($value) => new static($value), static::toArray());
     }
 
@@ -50,6 +62,16 @@ trait EnumTrait
      * @return array<string, mixed>
      */
     abstract public static function toArray(): array;
+
+    /**
+     * Whether the enumerations is singleton value or not in static class.
+     *
+     * @return bool
+     */
+    protected static function isSingleton(): bool
+    {
+        return false;
+    }
 
     /**
      * Searches the name-value array for a given value and returns the name if successful.
@@ -72,6 +94,12 @@ trait EnumTrait
      */
     public static function from($value): static
     {
+        if (static::isSingleton()) {
+            if ($name = static::search($value)) {
+                return static::all()[$name];
+            }
+            throw new ValueError();
+        }
         return new static($value);
     }
 
@@ -116,6 +144,6 @@ trait EnumTrait
     public static function tryFor(string $name): ?static
     {
         $value = static::toArray()[$name] ?? null;
-        return isset($value) ? new static($value) : $value;
+        return isset($value) ? static::from($value) : $value;
     }
 }

@@ -14,6 +14,25 @@ use Esse\Value\InstanceFromValueTrait;
  * ```
  * <?php
  * use Esse\PseudoFloat;
+ * class Distance extends PseudoFloat
+ * {
+ *     // @var int|float
+ *     const GREATER_THAN_OR_EQUAL_TO = 0;
+ *     const LESS_THAN_OR_EQUAL_TO = 42.195;
+ * }
+ * Distance::validate(0); // true
+ * Distance::from(42.195); // ok
+ * Distance::tryFrom(43.0); // null
+ *
+ * class TemperatureAsLiquid extends PseudoFloat
+ * {
+ *     // @var int|float
+ *     const GREATER_THAN = 0;
+ *     const LESS_THAN = 100;
+ * }
+ * TemperatureAsLiquid::validate(0); // false
+ * TemperatureAsLiquid::from(100); // Error
+ *
  * class CalculationResult extends PseudoFloat
  * {
  *     // Accepts NAN as a value.
@@ -23,6 +42,8 @@ use Esse\Value\InstanceFromValueTrait;
  *     // @var true
  *     const ACCEPT_INF = true;
  * }
+ * CalculationResult::validate(\acos(8)); // true
+ * CalculationResult::from(\log(0)); // ok
  * ```
  *
  * @method static static from(mixed $value)         Generates an instance with a value.
