@@ -4,6 +4,7 @@ namespace Esse\Tests
 {
     use Esse\Tests\PseudoEnumTest\Description;
     use Esse\Tests\PseudoEnumTest\Progress;
+    use Esse\Tests\PseudoEnumTest\SingletonSuit;
     use Esse\Tests\PseudoEnumTest\Suit;
     use PHPUnit\Framework\TestCase;
     use ReflectionClass;
@@ -67,6 +68,22 @@ namespace Esse\Tests
             ];
             $this->assertEquals($expected, $descriptions);
         }
+
+        public function test_singleton()
+        {
+            $array = Suit::toArray();
+            $this->assertEquals($array, SingletonSuit::toArray());
+
+            foreach ($array as $name => $value) {
+                $notSingletonFromValue = Suit::from($value);
+                $notSingletonForName = Suit::for($name);
+                $this->assertFalse($notSingletonFromValue === $notSingletonForName);
+
+                $singletonFromValue = SingletonSuit::from($value);
+                $singletonForName = SingletonSuit::for($name);
+                $this->assertTrue($singletonFromValue === $singletonForName);
+            }
+        }
     }
 }
 
@@ -100,5 +117,10 @@ namespace Esse\Tests\PseudoEnumTest
     class Description extends Sugoroku
     {
         protected static $excluded = ['forward', 'back', 'stop'];
+    }
+
+    class SingletonSuit extends Suit
+    {
+        protected static $singleton = true;
     }
 }

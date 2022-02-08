@@ -43,6 +43,22 @@ use Esse\Enum\EnumTrait;
  * }
  * ```
  *
+ * If you want to correct the value to a singleton as in the native Enum:
+ *
+ * ```
+ * <?php
+ * use Esse\PseudoEnum;
+ * class Suit extends PseudoEnum
+ * {
+ *     const Hearts = 'H';
+ *     const Diamonds = 'D';
+ *     const Clubs = 'C';
+ *     const Spades = 'S';
+ *
+ *     protected static $singleton = true; // Add line.
+ * }
+ * ```
+ *
  * @method static static from(mixed $value)         Generates an instance with a value(e.g. 'H').
  *                                                  Throws ValueError if an invalid value given.
  * @method static static|null tryFrom(mixed $value) Generates an instance with a value(e.g. 'H').
@@ -80,6 +96,13 @@ abstract class PseudoEnum implements EnumInterface
      */
     protected static $excluded = [];
 
+    /**
+     * Whether the enumerations is singleton value or not in static class.
+     *
+     * @return bool
+     */
+    protected static $singleton = false;
+
     protected static function includedConstantsInEnums(): array
     {
         return static::$included;
@@ -88,5 +111,10 @@ abstract class PseudoEnum implements EnumInterface
     protected static function excludedConstantsFromEnums(): array
     {
         return static::$excluded;
+    }
+
+    protected static function isSingleton(): bool
+    {
+        return static::$singleton;
     }
 }

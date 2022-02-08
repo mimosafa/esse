@@ -2,6 +2,7 @@
 
 namespace Esse\Tests\Enum
 {
+    use Esse\Tests\Enum\EnumTest\SingletonSuit;
     use Esse\Tests\Enum\EnumTest\Suit;
     use Esse\Tests\Enum\EnumTest\SuitDefinedConstants;
     use PHPUnit\Framework\TestCase;
@@ -32,6 +33,22 @@ namespace Esse\Tests\Enum
 
             foreach ($all as $name => $case) {
                 $this->assertEquals($array[$name], $case->value());
+            }
+        }
+
+        public function test_singleton()
+        {
+            $array = Suit::toArray();
+            $this->assertEquals($array, SingletonSuit::toArray());
+
+            foreach ($array as $name => $value) {
+                $notSingletonFromValue = Suit::from($value);
+                $notSingletonForName = Suit::for($name);
+                $this->assertFalse($notSingletonFromValue === $notSingletonForName);
+
+                $singletonFromValue = SingletonSuit::from($value);
+                $singletonForName = SingletonSuit::for($name);
+                $this->assertTrue($singletonFromValue === $singletonForName);
             }
         }
 
@@ -102,5 +119,13 @@ namespace Esse\Tests\Enum\EnumTest
         const Diamonds = 'D';
         const Clubs = 'C';
         const Spades = 'S';
+    }
+
+    class SingletonSuit extends Suit
+    {
+        protected static function isSingleton(): bool
+        {
+            return true;
+        }
     }
 }
