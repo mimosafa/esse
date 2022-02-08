@@ -34,9 +34,6 @@ trait BackedEnumTrait
      */
     final protected function __construct(int|string $value)
     {
-        if (! \is_scalar($value)) {
-            throw new ValueError();
-        }
         $this->constructUnitEnum($value);
     }
 

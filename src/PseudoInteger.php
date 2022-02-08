@@ -23,6 +23,11 @@ use Esse\Value\InstanceFromValueTrait;
  *     // @var int
  *     const MAX = 10;
  * }
+ * Rating::validate(1); // true
+ * Rating::from(10); // ok
+ * Rating::validate(0); // false
+ * Rating::tryFrom(11); // null
+ * Rating::from(99); // Error
  * ```
  *
  * @method static static from(mixed $value)         Generates an instance with a value.
