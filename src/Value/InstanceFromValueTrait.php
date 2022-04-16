@@ -2,6 +2,10 @@
 
 namespace Esse\Value;
 
+use Throwable;
+use TypeError;
+use ValueError;
+
 trait InstanceFromValueTrait
 {
     abstract public static function validate($value): bool;
@@ -27,6 +31,13 @@ trait InstanceFromValueTrait
      */
     public static function tryFrom($value): ?static
     {
-        return static::validate($value) ? static::from($value) : null;
+        try {
+            return static::from($value);
+        } catch (Throwable $th) {
+            if ($th instanceof TypeError || $th instanceof ValueError) {
+                return null;
+            }
+            throw $th;
+        }
     }
 }
