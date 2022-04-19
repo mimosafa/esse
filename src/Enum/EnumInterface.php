@@ -17,6 +17,14 @@ interface EnumInterface extends ValueInterface
     public function name(): string;
 
     /**
+     * Checks existence of the enum case by its name.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public static function exists(string $name): bool;
+
+    /**
      * Generates a list of cases on an enum with the name as a key.
      *
      * @return array<string, static>

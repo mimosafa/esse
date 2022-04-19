@@ -77,6 +77,7 @@ use Esse\Enum\EnumTrait;
  * @method static static|null tryFor(mixed $value)  Generates an instance with a name(e.g. 'Hearts').
  *                                                  Returns null if an invalid value given.
  * @method static bool validate(mixed $value)       Validates a scalar as enumeration value.
+ * @method static bool exists(string $name)         Checks existence of the enum case by its name.
  * @method bool|int|float|string value()            Returns the original scalar value.
  * @method string name()                            Returns the name of enumeration value.
  * @method bool isEqual(mixed $value)               Checks for equivalence with a given,

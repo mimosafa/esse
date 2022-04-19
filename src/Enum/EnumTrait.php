@@ -42,6 +42,17 @@ trait EnumTrait
     }
 
     /**
+     * Checks existence of the enum case by its name.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public static function exists(string $name): bool
+    {
+        return \array_key_exists($name, static::toArray());
+    }
+
+    /**
      * Generates a list of cases on an enum with the name as a key.
      *
      * @return array<string, static>
@@ -143,7 +154,6 @@ trait EnumTrait
      */
     public static function tryFor(string $name): ?static
     {
-        $value = static::toArray()[$name] ?? null;
-        return isset($value) ? static::from($value) : $value;
+        return static::exists($name) ? static::from(static::toArray()[$name]) : null;
     }
 }

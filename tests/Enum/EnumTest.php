@@ -26,6 +26,12 @@ namespace Esse\Tests\Enum
             $this->assertFalse($hearts === new Suit('H'));
         }
 
+        public function test_exists()
+        {
+            $this->assertTrue(Suit::exists('Hearts'));
+            $this->assertFalse(Suit::exists('H'));
+        }
+
         public function test_all()
         {
             $all = Suit::all();
